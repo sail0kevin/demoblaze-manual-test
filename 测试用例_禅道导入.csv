@@ -1,0 +1,113 @@
+所属模块,用例标题,前置条件,步骤,预期,关键词,优先级
+登录,"TC-LOGIN-001 已注册账号使用正确密码登录",已注册账号 test123/test123,"1.点击顶部 Log in
+2.输入用户名 test123
+3.输入密码 test123
+4.点击 Log in",弹窗关闭 顶部显示 Welcome test123  Login 变为 Log out,正常登录,3
+登录,"TC-LOGIN-002 用户名正确但密码错误",已知正确密码的账号 test123,"1.点击 Log in
+2.输入 test123
+3.输入错误密码 wrongpass
+4.点击 Log in",弹窗提示 Wrong password 不跳转,异常场景,3
+登录,"TC-LOGIN-003 用户名不存在",无,"1.点击 Log in
+2.输入不存在的用户名 usernotexist999
+3.输入密码 123456
+4.点击 Log in",弹窗提示 User does not exist,异常场景,3
+登录,"TC-LOGIN-004 用户名为空尝试登录",无,"1.点击 Log in
+2.用户名留空
+3.输入密码 123456
+4.点击 Log in",弹窗提示 Please fill out Username and Password,异常场景,3
+登录,"TC-LOGIN-005 密码为空尝试登录",无,"1.点击 Log in
+2.输入用户名 test123
+3.密码留空
+4.点击 Log in",弹窗提示 Please fill out Username and Password,异常场景,3
+登录,"TC-LOGIN-006 用户名和密码都为空",无,"1.点击 Log in
+2.两个字段都留空
+3.点击 Log in",弹窗提示 Please fill out Username and Password,异常场景,2
+登录,"TC-LOGIN-007 用户名输入XSS攻击脚本",无,"1.点击 Log in
+2.输入用户名 <script>alert(1)</script>
+3.输入密码 123456
+4.点击 Log in",不触发弹窗或脚本执行 系统正常拒绝,安全测试,2
+登录,"TC-LOGIN-008 用户名输入超长字符串",无,"1.点击 Log in
+2.输入超过1000个字符的用户名
+3.输入密码 123456
+4.点击 Log in",系统不崩溃 正常提示错误,边界测试,1
+注册,"TC-SIGN-001 新用户正常注册",用户名未被占用,"1.点击 Sign up
+2.输入用户名 newtestuser1
+3.输入密码 pass123
+4.点击 Sign up",弹窗提示 Sign up successful,正常注册,3
+注册,"TC-SIGN-002 使用已存在用户名注册",账号 test123 已存在,"1.点击 Sign up
+2.输入 test123
+3.输入密码
+4.点击 Sign up",弹窗提示 This user already exist,异常场景,3
+注册,"TC-SIGN-003 注册时用户名为空",无,"1.点击 Sign up
+2.用户名留空
+3.输入密码 pass123
+4.点击 Sign up",弹窗提示 Please fill out Username and Password,异常场景,3
+注册,"TC-SIGN-004 注册时密码为空",无,"1.点击 Sign up
+2.输入用户名 newuser
+3.密码留空
+4.点击 Sign up",弹窗提示 Please fill out Username and Password,异常场景,3
+注册,"TC-SIGN-005 注册时用户名和密码都为空",无,"1.点击 Sign up
+2.两者留空
+3.点击 Sign up",弹窗提示 Please fill out Username and Password,异常场景,2
+注册,"TC-SIGN-006 密码只输入1个字符",无,"1.点击 Sign up
+2.输入用户名 newuser2
+3.密码输入1个字符 a
+4.点击 Sign up",系统正常注册 或提示密码太短,边界测试,2
+注册,"TC-SIGN-007 用户名包含特殊字符",无,"1.点击 Sign up
+2.输入用户名 @#$%!test
+3.输入密码 pass123
+4.点击 Sign up",注册成功或给出合理拒绝,边界测试,1
+商品浏览,"TC-PROD-001 首页正常加载商品列表",无,打开 demoblaze.com,首页展示商品卡片 含图片 名称 价格 描述,正常浏览,3
+商品浏览,"TC-PROD-002 点击商品进入详情页",首页已加载,点击任意商品卡片,跳转详情页 展示大图 完整名称 价格 描述 Add to cart,正常浏览,3
+商品筛选,"TC-PROD-003 按分类筛选 Phones",首页已加载,点击左侧分类 Phones,只显示手机类商品,分类筛选,3
+商品筛选,"TC-PROD-004 按分类筛选 Laptops",首页已加载,点击左侧分类 Laptops,只显示笔记本类商品,分类筛选,3
+商品筛选,"TC-PROD-005 按分类筛选 Monitors",首页已加载,点击左侧分类 Monitors,只显示显示器类商品,分类筛选,3
+商品浏览,"TC-PROD-006 翻页到下一页",首页已加载,点击底部 Next 按钮,展示第二页商品 Previous 变为可用,翻页功能,2
+商品浏览,"TC-PROD-007 翻页返回上一页",当前在第二页,点击底部 Previous 按钮,返回第一页,翻页功能,2
+商品筛选,"TC-PROD-008 快速连续切换分类",首页已加载,快速连续点击 Phones Laptops Monitors,最终显示正确分类 页面不崩溃,稳定性,2
+商品浏览,"TC-PROD-009 第一页点击 Previous",在首页第一页,点击 Previous 按钮,按钮置灰不可点 或无跳转,边界测试,1
+商品浏览,"TC-PROD-010 最后一页点击 Next",翻到最后一页,点击 Next 按钮,按钮置灰不可点 或无跳转,边界测试,1
+购物车,"TC-CART-001 添加商品到购物车",已登录 进入商品详情页,"1.点击商品进入详情页
+2.点击 Add to cart",弹窗提示 Product added,正常操作,3
+购物车,"TC-CART-002 查看购物车",已添加商品,点击顶部 Cart,展示商品列表 含图片 名称 价格 Delete,正常操作,3
+购物车,"TC-CART-003 删除购物车中的商品",购物车有商品,"1.点击 Cart
+2.点击某商品的 Delete",该商品从列表移除 总价更新,正常操作,3
+购物车,"TC-CART-004 从购物车进入下单",购物车有商品,"1.点击 Cart
+2.点击 Place Order",弹出下单表单 Name Country City Credit card Month Year,正常操作,3
+购物车,"TC-CART-005 未登录状态下添加商品",未登录,"1.不登录进入商品详情
+2.点击 Add to cart",记录实际行为 允许加入或要求登录,权限测试,2
+购物车,"TC-CART-006 重复多次添加同一商品",已登录 进入商品详情页,连续点击 Add to cart 5次,购物车中出现5条相同商品记录,边界测试,2
+购物车,"TC-CART-007 购物车为空时点击下单",购物车无商品,"1.确保购物车为空
+2.点击 Cart
+3.点击 Place Order",提示为空或总价0,边界测试,2
+购物车,"TC-CART-008 删除购物车所有商品",购物车有多件商品,逐一删除所有商品,购物车为空 总价0,边界测试,1
+下单,"TC-ORDER-001 填写完整信息正常提交订单",购物车有商品 打开下单表单,"填写 Name:张三 Country:中国 City:北京 Credit card:4111111111111111 Month:05 Year:2027
+点击 Purchase",弹窗显示购买成功信息 含订单金额,正常下单,3
+下单,"TC-ORDER-002 下单成功后购物车清空",已完成一次下单,"1.下单成功点击 OK
+2.再次点击 Cart",购物车已清空,正常下单,3
+下单,"TC-ORDER-003 所有字段为空提交",购物车有商品,"打开表单
+全部留空
+点击 Purchase",弹窗提示 Please fill out Name and Creditcard,异常场景,3
+下单,"TC-ORDER-004 仅部分字段填写",购物车有商品,"只填 Name 张三
+其他留空
+点击 Purchase",弹窗提示缺少必填信息,异常场景,2
+下单,"TC-ORDER-005 信用卡号输入非数字",购物车有商品,"信用卡号输入 abc123
+其他正常填写
+点击 Purchase",记录系统是否校验卡号格式,异常场景,2
+下单,"TC-ORDER-006 信用卡号超长输入",购物车有商品,"信用卡号输入 1000位数字
+其他正常填写
+点击 Purchase",系统不崩溃,边界测试,1
+下单,"TC-ORDER-007 月份年份输入非法值",购物车有商品,"Month 输入 13
+Year 输入 1900
+其他正常填写
+点击 Purchase",记录系统是否校验日期合法性,边界测试,2
+下单,"TC-ORDER-008 取消下单后商品仍在购物车",购物车有商品 下单表单已打开,"1.点击表单 X 关闭
+2.再次点击 Cart",商品仍在购物车 未被清空,中断测试,2
+导航,"TC-NAV-001 点击 Home 返回首页",在商品详情页或子页面,点击顶部 Home,跳转回首页商品列表,页面跳转,2
+导航,"TC-NAV-002 点击 Product Store 返回首页",在任意子页面,点击左上角 Product Store,跳转回首页,页面跳转,2
+导航,"TC-NAV-003 点击 Cart 访问购物车",已登录,点击顶部 Cart,跳转到购物车页面,页面跳转,3
+导航,"TC-NAV-004 点击 Contact 打开联系页",无,点击顶部 Contact,弹出联系表单,页面跳转,1
+导航,"TC-NAV-005 点击 About us 打开关于页",无,点击顶部 About us,弹出关于页面,页面跳转,1
+导航,"TC-NAV-006 浏览器后退按钮",已浏览2个以上页面,点击浏览器后退按钮,返回前一页 状态正常,浏览器行为,2
+导航,"TC-NAV-007 浏览器前进按钮",已点击过后退,点击浏览器前进按钮,回到后退前的页面,浏览器行为,1
+导航,"TC-NAV-008 浏览器刷新",在任意页面,按 F5 刷新,页面正常重新加载,浏览器行为,2
